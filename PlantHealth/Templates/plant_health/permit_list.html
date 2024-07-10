@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Permits</title>
+</head>
+<body>
+    <h1>Permits</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer Name</th>
+                <th>Inspector</th>
+                <th>Disease Identified</th>
+                <th>Region of Origin</th>
+                <th>Country Heading</th>
+                <th>Quantity</th>
+                <th>Test Conducted</th>
+                <th>Chemical Used</th>
+                <th>Volume Used</th>
+                <th>Total Charge</th>
+                <th>Station</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for permit in permits %}
+            <tr>
+                <td><a href="{% url 'permit_detail' permit.id %}">{{ permit.id }}</a></td>
+                <td>{{ permit.customer_name }}</td>
+                <td>{{ permit.inspector }}</td>
+                <td>{{ permit.disease_identified }}</td>
+                <td>{{ permit.region_of_origin }}</td>
+                <td>{{ permit.country_heading }}</td>
+                <td>{{ permit.quantity }}</td>
+                <td>{{ permit.test_conducted }}</td>
+                <td>{{ permit.chemical_used }}</td>
+                <td>{{ permit.volume_used }}</td>
+                <td>{{ permit.total_charge }}</td>
+                <td>{{ permit.station }}</td>
+                <td>{{ permit.status }}</td>
+                <td>
+                    <a href="{% url 'permit_detail' permit.id %}">View</a>
+                    <a href="{% url 'generate_pdf' permit.id %}">Print PDF</a>
+                    <a href="#">Delete</a>
+                    <a href="#">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
