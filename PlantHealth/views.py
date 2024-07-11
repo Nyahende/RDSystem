@@ -6,7 +6,7 @@ from xhtml2pdf import pisa
 import datetime
 
 def permit_list(request):
-    permits = Permit.objects.all()
+    permits = Permit.objects.all().order_by('-id')
     return render(request, 'plant_health/permit_list.html', {'permits': permits})
 
 def permit_detail(request, permit_id):

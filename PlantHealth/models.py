@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Permit(models.Model):
     customer_name = models.CharField(max_length=200)
@@ -13,6 +14,7 @@ class Permit(models.Model):
     total_charge = models.FloatField()
     station = models.CharField(max_length=200)
     status = models.CharField(max_length=10, choices=[('Pass', 'Pass'), ('Rejected', 'Rejected')])
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f'{self.customer_name} - {self.id}'
