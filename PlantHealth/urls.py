@@ -6,6 +6,7 @@ urlpatterns = [
 
     path('permits/', views.permit_list, name='permit_list'),
     path('permits/<int:permit_id>/', views.permit_detail, name='permit_detail'),
+    path('permits/print/<int:permit_id>/', views.permit_detail_print, name='permit_detail_print'),
     path('permits/<int:permit_id>/pdf/', views.generate_pdf, name='generate_pdf'),
     path('charts/', views.chart_data, name='chart_data'),
     path('permits/create/', views.create_permit, name='create_permit'),

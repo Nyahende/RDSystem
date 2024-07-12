@@ -1,0 +1,178 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Permit Details </title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="{% static 'plant_health/dist/css/adminlte.min.css' %}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'plant_health/plugins/fontawesome-free/css/all.min.css' %}">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1 class="m-0">Permit Details</h1>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+          </div>
+      
+          <section class="content">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="callout callout-info">
+                    <h5> DATE ISSUED: {{ permit.created_at }}
+      
+                    </h5>
+      
+                   
+                  </div>
+      
+      
+                  <!-- Main content -->
+                  <div class="invoice p-3 mb-3">
+                    <!-- title row -->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h4>
+                           INSPECTOR'S INFORMATION
+                        </h4>
+                        <address>
+                          <strong>Inspector's name:</strong> {{permit.inspector}}<br>
+                          <strong>Inspector's Phone:</strong> 0784392668<br>
+                          <strong>Inspector's Email:</strong> michaelnyaehnde8@gmail.com<br>
+                          
+                        </address>
+      
+                      </div>
+      
+                      <div class="col-md-6">
+                       
+                          <h4>
+                             CUSTOMER'S INFORMATION
+                          </h4>
+                          <address>
+                            <strong>customer's name:</strong> {{permit.customer_name}}<br>
+                            <strong>customer's Phone:</strong> 0784392668<br>
+                            <strong>customer's Email:</strong> michaelnyaehnde8@gmail.com<br>
+                            
+                          </address>
+        
+                    </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- info row -->
+                    
+      
+                       <div class="row">
+                      <div class="col-6">
+      
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tr>
+                              <th style="width:50%">ID:</th>
+                              <td>{{permit.id}}</td>
+                            </tr>
+                            <tr>
+                              <th>Product Name</th>
+                              <td>{{permit.product_name}}</td>
+                            </tr>
+                            <tr>
+                              <th>Disease Identified:</th>
+                              <td>{{permit.disease_identified}}</td>
+                            </tr>
+                            <tr>
+                              <th>Region:</th>
+                              <td>{{permit.region}}</td>
+                            </tr>
+                            <tr>
+                              <th>Destination:</th>
+                              <td>{{permit.country_heading}}</td>
+                            </tr>
+                            <tr>
+                              <th>Quantity:</th>
+                              <td>{{permit.quantity}}</td>
+                            </tr><br>
+                            
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-6">
+      
+                        <div class="table-responsive">
+                          <table class="table">
+                           
+                            <tr>
+                              <th>Test Conducted</th>
+                              <td>{{permit.test_conducted}}</td>
+                            </tr>
+                            <tr>
+                              <th>Chemical Used</th>
+                              <td>{{permit.chemical_used}}</td>
+                            </tr>
+                            <tr>
+                              <th>Volume Used</th>
+                              <td>{{permit.volume_used}}</td>
+                            </tr>
+                            <tr>
+                              <th>Total Charge</th>
+                              <td>{{permit.total_charge}}</td>
+                            </tr>
+                            <tr>
+                              <th>Station</th>
+                              <td>{{permit.station}}</td>
+                            </tr>
+                            <tr>
+                              <th>Status</th>
+                              <td>{{permit.status}}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+      
+                    <!-- this row will not appear when printing -->
+                    <div class="row no-print">
+                      <div class="col-12">
+                        
+                        <a href="{% url 'permit_detail_print' permit.id %}"><button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                          <i class="fas fa-download"></i> Print PDF
+                        </button></a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.invoice -->
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+              <!-- /.row -->
+            </div><!-- /.container-fluid -->
+          </section>
+      
+        </div>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="{% static 'plant_health/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plant_health/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'plant_health/dist/js/adminlte.min.js' %}"></script>
+<script>
+    window.addEventListener("load", window.print());
+</script>
+</body>
+</html>

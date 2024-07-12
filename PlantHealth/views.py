@@ -4,9 +4,12 @@ from .models import Permit, User
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 import datetime
+from django.shortcuts import redirect
+from .forms import PermitForm, UserForm
+
 
 def permit_list(request):
-    permits = Permit.objects.all().order_by('-id')
+    permits = Permit.objects.all()
     return render(request, 'plant_health/permit_list.html', {'permits': permits})
 
 def permit_detail(request, permit_id):
@@ -15,33 +18,39 @@ def permit_detail(request, permit_id):
 
 def generate_pdf(request, permit_id):
     permit = get_object_or_404(Permit, id=permit_id)
-    template_path = 'plant_health/permit_detail.html'
-    context = {'permit': permit}
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'filename="permit_{permit_id}.pdf"'
-    template = get_template(template_path)
-    html = template.render(context)
-    pisa_status = pisa.CreatePDF(html, dest=response)
-    if pisa_status.err:
-        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response
+    return render(request, 'plant_health/permit_detail.html', {'permit': permit})
 
-def chart_data(request):
-    permits = Permit.objects.all()
-    # Filter permits by station and time period
-    weekly_permits = permits.filter(created_at__gte=datetime.datetime.now() - datetime.timedelta(days=7))
-    monthly_permits = permits.filter(created_at__gte=datetime.datetime.now() - datetime.timedelta(days=30))
-    yearly_permits = permits.filter(created_at__gte=datetime.datetime.now() - datetime.timedelta(days=365))
-    return render(request, 'plant_health/charts.html', {
-        'weekly_permits': weekly_permits,
-        'monthly_permits': monthly_permits,
-        'yearly_permits': yearly_permits
-    })
+def permit_detail_print(request, permit_id):
+    permit = get_object_or_404(Permit, id=permit_id)
+    return render(request, 'plant_health/permit_detail_print.html', {'permit': permit})
+
+# def generate_pdf(request, permit_id):
+#     permit = get_object_or_404(Permit, id=permit_id)
+#     template_path = 'plant_health/permit_detail.html'
+#     context = {'permit': permit}
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = f'filename="permit_{permit_id}.pdf"'
+#     template = get_template(template_path)
+#     html = template.render(context)
+#     pisa_status = pisa.CreatePDF(html, dest=response)
+#     if pisa_status.err:
+#         return HttpResponse('We had some errors <pre>' + html + '</pre>')
+#     return response
+
+# def chart_data(request):
+#     permits = Permit.objects.all()
+#     # Filter permits by station and time period
+#     weekly_permits = permits.filter(created_at__gte=datetime.datetime.now() - datetime.timedelta(days=7))
+#     monthly_permits = permits.filter(created_at__gte=datetime.datetime.now() - datetime.timedelta(days=30))
+#     yearly_permits = permits.filter(created_at__gte=datetime.datetime.now() - datetime.timedelta(days=365))
+#     return render(request, 'plant_health/charts.html', {
+#         'weekly_permits': weekly_permits,
+#         'monthly_permits': monthly_permits,
+#         'yearly_permits': yearly_permits
+#     })
 
 
 
-from django.shortcuts import redirect
-from .forms import PermitForm, UserForm
 
 def create_permit(request):
     if request.method == 'POST':
