@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Monitoring</title>
+    <link rel="stylesheet" href="{% static 'adminlte/css/adminlte.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Create Monitoring</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ monitoring_form.as_p }}
+                    {{ crop_form.as_p }}
+                    {{ pest_form.as_p }}
+                </div>
+                <div class="col-md-6">
+                    {{ disease_form.as_p }}
+                    {{ env_form.as_p }}
+                    {{ manage_form.as_p }}
+                    {{ data_form.as_p }}
+                    {{ attachment_form.as_p }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+</body>
+</html>

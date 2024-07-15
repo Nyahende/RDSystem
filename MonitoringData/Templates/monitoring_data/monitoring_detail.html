@@ -1,0 +1,74 @@
+<h2>Crop/Plant Information</h2>
+<ul>
+    {% for crop in monitoring.cropplantinfo_set.all %}
+        <li>Type: {{ crop.crop_plant_type }}</li>
+        <li>Variety: {{ crop.variety }}</li>
+        <li>Growth Stage: {{ crop.growth_stage }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Pest Monitoring Data</h2>
+<ul>
+    {% for pest in monitoring.pestmonitoringdata_set.all %}
+        <li>Presence: {{ pest.pest_presence }}</li>
+        <li>Type: {{ pest.pest_type }}</li>
+        <li>Name: {{ pest.pest_name }}</li>
+        <li>Density: {{ pest.pest_density }}</li>
+        <li>Damage: {{ pest.pest_damage }}</li>
+        <li>Life Stage: {{ pest.pest_life_stage }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Disease Monitoring Data</h2>
+<ul>
+    {% for disease in monitoring.diseasemonitoringdata_set.all %}
+        <li>Presence: {{ disease.disease_presence }}</li>
+        <li>Type: {{ disease.disease_type }}</li>
+        <li>Name: {{ disease.disease_name }}</li>
+        <li>Severity: {{ disease.disease_severity }}</li>
+        <li>Symptoms: {{ disease.disease_symptoms }}</li>
+        <li>Spread: {{ disease.disease_spread }}</li>
+        <li>Incidence: {{ disease.disease_incidence }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Environmental Conditions</h2>
+<ul>
+    {% for env in monitoring.environmentalcondition_set.all %}
+        <li>Temperature: {{ env.temperature }}</li>
+        <li>Humidity: {{ env.humidity }}</li>
+        <li>Soil Moisture: {{ env.soil_moisture }}</li>
+        <li>Weather Conditions: {{ env.weather_conditions }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Management Practices</h2>
+<ul>
+    {% for manage in monitoring.managementpractice_set.all %}
+        <li>Current Practices: {{ manage.current_practices }}</li>
+        <li>Effectiveness: {{ manage.effectiveness }}</li>
+        <li>New Measures: {{ manage.new_measures }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Data Collection Tools</h2>
+<ul>
+    {% for data in monitoring.datacollectiontool_set.all %}
+        <li>Traps Used: {{ data.traps_used }}</li>
+        <li>Sensors Deployed: {{ data.sensors_deployed }}</li>
+        <li>Survey Methods: {{ data.survey_methods }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Attachments and Media</h2>
+<ul>
+    {% for attach in monitoring.attachmentmedia_set.all %}
+        <li>Photos/Videos: <a href="{{ attach.photo_video.url }}">View</a></li>
+        <li>Notes: {{ attach.notes }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'monitoring_list' %}" class="btn btn-primary">Back to List</a>
+</div>
+</body>
+</html>
